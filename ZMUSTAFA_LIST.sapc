@@ -1,0 +1,32 @@
+*&---------------------------------------------------------------------*
+*& Report ZMUSTAFA_LIST
+*&---------------------------------------------------------------------*
+*& Created by Mustafa Alpay
+*&---------------------------------------------------------------------*
+
+*select employees by employeeID selection screen
+REPORT zmustafa_list.
+
+TABLES: zmustafa.
+
+
+DATA: wa_employee LIKE zmustafa-employee.
+
+PARAMETERS: employid LIKE zmustafa-employee
+                          DEFAULT '10000001' OBLIGATORY,
+
+            greater  RADIOBUTTON GROUP grp1,
+            lessthen RADIOBUTTON GROUP grp1.
+
+SELECT * FROM zmustafa.
+  IF lessthen = 'X'.
+    IF zmustafa-employee < employid.
+      WRITE: / zmustafa.
+    ENDIF.
+  ELSE.
+    IF zmustafa-employee > employid.
+      WRITE: / zmustafa.
+    ENDIF.
+  ENDIF.
+
+ENDSELECT.
